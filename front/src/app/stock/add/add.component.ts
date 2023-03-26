@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { of, switchMap } from 'rxjs';
+import { faPlus, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { of, switchMap, tap } from 'rxjs';
 import { NewArticle } from 'src/app/interfaces/article';
 import { ArticleService } from 'src/app/services/article.service';
 
@@ -13,6 +13,9 @@ import { ArticleService } from 'src/app/services/article.service';
 })
 export class AddComponent {
   faPlus = faPlus;
+  faCircleNotch = faCircleNotch;
+
+  isAdding = false;
 
   f = new FormGroup({
     name: new FormControl('Truc', [
@@ -33,11 +36,15 @@ export class AddComponent {
     of(undefined)
       .pipe(
         switchMap(() => {
+          this.isAdding = true;
           const newArticle = this.f.value as unknown as NewArticle;
           return this.articleService.add(newArticle);
         }),
         switchMap(() => {
           return this.router.navigate(['..'], { relativeTo: this.route });
+        }),
+        tap(() => {
+          this.isAdding = false;
         })
       )
       .subscribe();

@@ -32,6 +32,13 @@ export class ArticleService {
     );
   }
 
+  refresh(): Observable<void> {
+    return of(undefined).pipe(
+      delay(2000),
+      tap(() => this.articles$.next(this.articles$.value))
+    );
+  }
+
   remove(ids: string[]): Observable<void> {
     return of(undefined).pipe(
       delay(2000),

@@ -14,13 +14,17 @@ import { ArticleService } from '../services/article.service';
   styleUrls: ['./stock.component.scss'],
 })
 export class StockComponent {
+  errorMsg = '';
   faPlus = faPlus;
   faRotateRight = faRotateRight;
   faTrashAlt = faTrashAlt;
   selectedArticles = new Set<Article>();
-  errorMsg = '';
 
   constructor(protected readonly articleService: ArticleService) {}
+
+  refresh(): Observable<void> {
+    return of(undefined).pipe(switchMap(() => this.articleService.refresh()));
+  }
 
   remove(): Observable<void> {
     return of(undefined).pipe(

@@ -11,6 +11,11 @@ import { LegalComponent } from './routes/legal/legal.component';
 import { ArticleService } from './services/article.service';
 import { HttpArticlesService } from './services/http-articles.service';
 
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr-BE';
+
+registerLocaleData(localeFr, 'fr-BE');
+
 @NgModule({
   declarations: [AppComponent, HomeComponent, LegalComponent],
   imports: [

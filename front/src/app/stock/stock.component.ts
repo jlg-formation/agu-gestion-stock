@@ -20,4 +20,12 @@ export class StockComponent {
   selectedArticles = new Set<Article>();
 
   constructor(protected readonly articleService: ArticleService) {}
+
+  select(a: Article) {
+    if (this.selectedArticles.has(a)) {
+      this.selectedArticles.delete(a);
+      return;
+    }
+    this.selectedArticles.add(a);
+  }
 }

@@ -14,6 +14,16 @@ form {
       border: 0.1em solid #bbb;
       padding: 0.5em 1em;
       border-radius: 0.3em;
+
+      &.ng-invalid.ng-touched {
+        border-color: red;
+        outline-color: red;
+      }
+    }
+
+    span.error {
+      height: 1em;
+      font-weight: bold;
     }
   }
 

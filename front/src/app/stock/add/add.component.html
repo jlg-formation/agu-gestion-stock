@@ -4,14 +4,46 @@
     <label>
       <span>Nom</span>
       <input type="text" formControlName="name" />
+      <span class="error">
+        <ng-container *ngIf="f.controls.name.touched">
+          <span *ngIf="f.controls.name.errors?.['required']">
+            Champ requis.
+          </span>
+          <span *ngIf="f.controls.name.errors?.['minlength']">
+            Saisir minimum
+            {{ f.controls.name.errors?.['minlength'].requiredLength }}
+            caractères.
+          </span>
+        </ng-container>
+      </span>
     </label>
     <label>
       <span>Prix</span>
       <input type="number" formControlName="price" />
+      <span class="error">
+        <ng-container *ngIf="f.controls.name.touched">
+          <span *ngIf="f.controls.price.errors?.['required']">
+            Champ requis.
+          </span>
+          <span *ngIf="f.controls.price.errors?.['min']">
+            Le Prix doit être positif.
+          </span>
+        </ng-container>
+      </span>
     </label>
     <label>
       <span>Quantité</span>
       <input type="number" formControlName="qty" />
+      <span class="error">
+        <ng-container *ngIf="f.controls.name.touched">
+          <span *ngIf="f.controls.qty.errors?.['required']">
+            Champ requis.
+          </span>
+          <span *ngIf="f.controls.qty.errors?.['min']">
+            La Quantité doit être positive.
+          </span>
+        </ng-container>
+      </span>
     </label>
     <button class="primary" [disabled]="f.invalid">
       <fa-icon [icon]="faPlus"></fa-icon>

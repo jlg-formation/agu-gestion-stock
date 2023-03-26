@@ -57,6 +57,10 @@ export class StockComponent {
       switchMap(() => this.articleService.refresh()),
       tap(() => {
         this.selectedArticles.clear();
+      }),
+      catchError((err) => {
+        this.errorMsg = 'Erreur technique';
+        return of(undefined);
       })
     );
   }

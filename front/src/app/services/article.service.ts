@@ -31,4 +31,15 @@ export class ArticleService {
       })
     );
   }
+
+  remove(ids: string[]): Observable<void> {
+    return of(undefined).pipe(
+      delay(2000),
+      tap(() => {
+        this.articles$.next(
+          this.articles$.value.filter((a) => !ids.includes(a.id))
+        );
+      })
+    );
+  }
 }

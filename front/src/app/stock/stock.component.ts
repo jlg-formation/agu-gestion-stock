@@ -5,7 +5,7 @@ import {
   faRotateRight,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import { Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, take, tap } from 'rxjs';
 import { Article } from '../interfaces/article';
 import { ArticleService } from '../services/article.service';
 
@@ -22,20 +22,30 @@ export class StockComponent {
   faCircleNotch = faCircleNotch;
   selectedArticles = new Set<Article>();
 
-  isLoading = true;
-
   constructor(protected readonly articleService: ArticleService) {
-    this.articleService.articles$
-      .pipe(
-        tap(() => {
-          this.isLoading = false;
-        })
-      )
-      .subscribe();
+    if (articleService.articles$.value === undefined) {
+      console.log('refreshing');
+
+      articleService
+        .refresh()
+        .pipe(
+          catchError((err) => {
+            this.errorMsg = 'Erreur de chargement';
+            return of(undefined);
+          })
+        )
+        .subscribe();
+    }
   }
 
   refresh(): Observable<void> {
-    return of(undefined).pipe(switchMap(() => this.articleService.refresh()));
+    return of(undefined).pipe(
+      switchMap(() => this.articleService.refresh()),
+      catchError((err) => {
+        this.errorMsg = 'Erreur de chargement';
+        return of(undefined);
+      })
+    );
   }
 
   remove(): Observable<void> {

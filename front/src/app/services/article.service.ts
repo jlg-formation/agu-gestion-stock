@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { delay, Observable, of, ReplaySubject, tap } from 'rxjs';
+import { BehaviorSubject, delay, Observable, of, tap } from 'rxjs';
 import { Article, NewArticle } from '../interfaces/article';
 
 const generateId = () => {
@@ -14,11 +14,9 @@ export class ArticleService {
     { id: 'a1', name: 'Tournevis', price: 3.99, qty: 124 },
     { id: 'a2', name: 'Pelle', price: 5, qty: 45 },
   ];
-  articles$ = new ReplaySubject<Article[]>(1);
+  articles$ = new BehaviorSubject<Article[] | undefined>(undefined);
 
-  constructor() {
-    this.refresh().subscribe();
-  }
+  constructor() {}
 
   add(newArticle: NewArticle): Observable<void> {
     return of(undefined).pipe(

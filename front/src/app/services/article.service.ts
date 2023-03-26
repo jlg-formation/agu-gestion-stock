@@ -10,10 +10,7 @@ const generateId = () => {
   providedIn: 'root',
 })
 export class ArticleService {
-  articles: Article[] = [
-    { id: 'a1', name: 'Tournevis', price: 3.99, qty: 124 },
-    { id: 'a2', name: 'Pelle', price: 5, qty: 45 },
-  ];
+  articles: Article[] = [];
   articles$ = new BehaviorSubject<Article[] | undefined>(undefined);
 
   constructor() {}

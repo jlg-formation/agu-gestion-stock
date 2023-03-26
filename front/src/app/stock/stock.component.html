@@ -1,1 +1,47 @@
-<p>stock works!</p>
+<main>
+  <h1>Liste des articles</h1>
+  <div class="content">
+    <nav>
+      <button title="Rafraîchir">
+        <fa-icon [icon]="faRotateRight"></fa-icon>
+      </button>
+      <a class="button" routerLink="add" title="Ajouter">
+        <fa-icon [icon]="faPlus"></fa-icon>
+      </a>
+      <button title="Supprimer">
+        <fa-icon [icon]="faTrashAlt"></fa-icon>
+      </button>
+    </nav>
+    <table>
+      <thead>
+        <tr>
+          <th class="name">Nom</th>
+          <th class="price">Prix</th>
+          <th class="qty">Quantité</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">Tournevis</td>
+          <td class="price">3.99 €</td>
+          <td class="qty">123</td>
+        </tr>
+        <tr>
+          <td class="name">Marteau</td>
+          <td class="price">5.00 €</td>
+          <td class="qty">45</td>
+        </tr>
+        <tr>
+          <td class="name">Pelle</td>
+          <td class="price">7.50 €</td>
+          <td class="qty">6</td>
+        </tr>
+        <tr>
+          <td class="name">Râteau</td>
+          <td class="price">8.00 €</td>
+          <td class="qty">345</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>

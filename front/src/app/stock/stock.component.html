@@ -8,13 +8,12 @@
       <a class="button" routerLink="add" title="Ajouter">
         <fa-icon [icon]="faPlus"></fa-icon>
       </a>
-      <button
-        title="Supprimer"
+      <app-async-icon-button
+        label="Supprimer"
+        [observable]="remove()"
         [hidden]="selectedArticles.size === 0"
-        (click)="remove()"
-      >
-        <fa-icon [icon]="faTrashAlt"></fa-icon>
-      </button>
+        [icon]="faTrashAlt"
+      ></app-async-icon-button>
     </nav>
     <table>
       <thead>

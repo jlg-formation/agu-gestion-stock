@@ -1,1 +1,6 @@
-<p>async-icon-button works!</p>
+<button [title]="label" (click)="runAction()" [disabled]="isRunning">
+  <fa-icon
+    [icon]="isRunning ? faCircleNotch : icon"
+    [spin]="isRunning"
+  ></fa-icon>
+</button>

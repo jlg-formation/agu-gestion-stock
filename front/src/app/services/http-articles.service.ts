@@ -39,4 +39,19 @@ export class HttpArticlesService extends ArticleService {
       })
     );
   }
+
+  override remove(ids: string[]): Observable<void> {
+    return of(undefined).pipe(
+      delay(500),
+      switchMap(() =>
+        this.http.delete<void>(url, {
+          body: ids,
+        })
+      ),
+      catchError((err) => {
+        console.log('err: ', err);
+        throw err;
+      })
+    );
+  }
 }

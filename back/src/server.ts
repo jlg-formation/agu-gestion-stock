@@ -14,6 +14,13 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // res.setHeader("", "");
+  // res.setHeader("", "");
+  next();
+});
+
 app.use("/api", api);
 
 app.use(express.static(publicDir));

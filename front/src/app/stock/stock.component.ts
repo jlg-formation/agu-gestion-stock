@@ -4,6 +4,7 @@ import {
   faTrashAlt,
   faRotateRight,
 } from '@fortawesome/free-solid-svg-icons';
+import { Article } from '../interfaces/article';
 import { ArticleService } from '../services/article.service';
 
 @Component({
@@ -15,6 +16,8 @@ export class StockComponent {
   faPlus = faPlus;
   faRotateRight = faRotateRight;
   faTrashAlt = faTrashAlt;
+
+  selectedArticles = new Set<Article>();
 
   constructor(protected readonly articleService: ArticleService) {}
 }

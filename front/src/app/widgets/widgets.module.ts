@@ -6,8 +6,16 @@ import { AsyncIconButtonComponent } from './async-icon-button/async-icon-button.
 import { AutofocusDirective } from './autofocus.directive';
 
 @NgModule({
-  declarations: [AsyncSubmitButtonComponent, AsyncIconButtonComponent, AutofocusDirective],
+  declarations: [
+    AsyncSubmitButtonComponent,
+    AsyncIconButtonComponent,
+    AutofocusDirective,
+  ],
   imports: [CommonModule, FontAwesomeModule],
-  exports: [AsyncSubmitButtonComponent, AsyncIconButtonComponent],
+  exports: [
+    AsyncSubmitButtonComponent,
+    AsyncIconButtonComponent,
+    AutofocusDirective,
+  ],
 })
 export class WidgetsModule {}

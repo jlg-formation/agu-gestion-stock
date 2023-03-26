@@ -1,1 +1,7 @@
-<p>async-submit-button works!</p>
+<button class="primary" [disabled]="formGroup.invalid || isSubmitting">
+  <fa-icon
+    [icon]="isSubmitting ? faCircleNotch : icon"
+    [spin]="isSubmitting"
+  ></fa-icon>
+  <span>{{ label }}</span>
+</button>

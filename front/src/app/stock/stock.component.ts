@@ -32,6 +32,7 @@ export class StockComponent {
         const ids = [...this.selectedArticles].map((a) => a.id);
         return this.articleService.remove(ids);
       }),
+      switchMap(() => this.articleService.refresh()),
       tap(() => {
         this.selectedArticles.clear();
       })

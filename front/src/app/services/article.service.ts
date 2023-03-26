@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, delay, Observable, of, tap } from 'rxjs';
+import { delay, Observable, of, ReplaySubject, tap } from 'rxjs';
 import { Article, NewArticle } from '../interfaces/article';
 
 const generateId = () => {
@@ -10,45 +10,50 @@ const generateId = () => {
   providedIn: 'root',
 })
 export class ArticleService {
-  articles$ = new BehaviorSubject<Article[]>([
+  articles: Article[] = [
     { id: 'a1', name: 'Tournevis', price: 3.99, qty: 124 },
     { id: 'a2', name: 'Pelle', price: 5, qty: 45 },
-  ]);
+  ];
+  articles$ = new ReplaySubject<Article[]>(1);
 
-  constructor() {}
+  constructor() {
+    setTimeout(() => {
+      this.articles$.next(this.articles);
+    }, 2000);
+  }
 
   add(newArticle: NewArticle): Observable<void> {
     return of(undefined).pipe(
-      delay(2000),
+      delay(500),
 
       tap(() => {
         if (newArticle.name === 'Trucx') {
           throw new Error('Trucx is forbidden');
         }
         const article = { ...newArticle, id: generateId() };
-        this.articles$.value.push(article);
-        this.articles$.next(this.articles$.value);
+        this.articles.push(article);
       })
     );
   }
 
   refresh(): Observable<void> {
     return of(undefined).pipe(
-      delay(2000),
-      tap(() => this.articles$.next(this.articles$.value))
+      delay(500),
+      tap(() => {
+        this.articles$.next(this.articles);
+      })
     );
   }
 
   remove(ids: string[]): Observable<void> {
     return of(undefined).pipe(
-      delay(2000),
+      delay(500),
       tap(() => {
         if (ids.length === 2) {
           throw new Error('Cannot remove 2 items at once.');
         }
-        this.articles$.next(
-          this.articles$.value.filter((a) => !ids.includes(a.id))
-        );
+
+        this.articles = this.articles.filter((a) => !ids.includes(a.id));
       })
     );
   }

@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  // res.setHeader("", "");
+  res.setHeader("Access-Control-Allow-Headers", "*");
   // res.setHeader("", "");
   next();
 });

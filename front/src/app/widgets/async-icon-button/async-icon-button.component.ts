@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { catchError, finalize, Observable, of, switchMap, tap } from 'rxjs';
 
@@ -19,16 +19,24 @@ export class AsyncIconButtonComponent {
   @Input()
   label = 'To be defined for accessibility';
 
+  @Output()
+  error = new EventEmitter<string>();
+
+  @Output()
+  start = new EventEmitter<void>();
+
   runAction() {
     of(undefined)
       .pipe(
         tap(() => {
           this.isRunning = true;
+          this.start.emit();
         }),
         switchMap(() => this.observable),
         catchError((err) => {
           console.log('err: ', err);
-          throw err;
+          this.error.emit(err.message);
+          return of(undefined);
         }),
         finalize(() => {
           this.isRunning = false;

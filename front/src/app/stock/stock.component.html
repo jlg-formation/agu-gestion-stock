@@ -13,8 +13,13 @@
         [observable]="remove()"
         [hidden]="selectedArticles.size === 0"
         [icon]="faTrashAlt"
+        (error)="setError($event)"
+        (start)="setError('')"
       ></app-async-icon-button>
     </nav>
+    <div class="error">
+      {{ errorMsg }}
+    </div>
     <table>
       <thead>
         <tr>

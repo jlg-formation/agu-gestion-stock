@@ -18,6 +18,7 @@ export class StockComponent {
   faRotateRight = faRotateRight;
   faTrashAlt = faTrashAlt;
   selectedArticles = new Set<Article>();
+  errorMsg = '';
 
   constructor(protected readonly articleService: ArticleService) {}
 
@@ -39,5 +40,9 @@ export class StockComponent {
       return;
     }
     this.selectedArticles.add(a);
+  }
+
+  setError(errorMsg: string) {
+    this.errorMsg = errorMsg;
   }
 }

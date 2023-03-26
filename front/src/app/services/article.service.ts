@@ -36,6 +36,9 @@ export class ArticleService {
     return of(undefined).pipe(
       delay(2000),
       tap(() => {
+        if (ids.length === 2) {
+          throw new Error('Cannot remove 2 items at once.');
+        }
         this.articles$.next(
           this.articles$.value.filter((a) => !ids.includes(a.id))
         );

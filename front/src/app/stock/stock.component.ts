@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  faCircleNotch,
   faPlus,
   faRotateRight,
   faTrashAlt,
@@ -18,9 +19,20 @@ export class StockComponent {
   faPlus = faPlus;
   faRotateRight = faRotateRight;
   faTrashAlt = faTrashAlt;
+  faCircleNotch = faCircleNotch;
   selectedArticles = new Set<Article>();
 
-  constructor(protected readonly articleService: ArticleService) {}
+  isLoading = true;
+
+  constructor(protected readonly articleService: ArticleService) {
+    this.articleService.articles$
+      .pipe(
+        tap(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe();
+  }
 
   refresh(): Observable<void> {
     return of(undefined).pipe(switchMap(() => this.articleService.refresh()));

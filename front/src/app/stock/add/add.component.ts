@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faPlus, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-import { of, switchMap, tap } from 'rxjs';
+import { faCircleNotch, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { catchError, finalize, of, switchMap } from 'rxjs';
 import { NewArticle } from 'src/app/interfaces/article';
 import { ArticleService } from 'src/app/services/article.service';
 
@@ -16,6 +16,7 @@ export class AddComponent {
   faCircleNotch = faCircleNotch;
 
   isAdding = false;
+  errorMsg = '';
 
   f = new FormGroup({
     name: new FormControl('Truc', [
@@ -37,13 +38,19 @@ export class AddComponent {
       .pipe(
         switchMap(() => {
           this.isAdding = true;
+          this.errorMsg = '';
           const newArticle = this.f.value as unknown as NewArticle;
           return this.articleService.add(newArticle);
         }),
         switchMap(() => {
           return this.router.navigate(['..'], { relativeTo: this.route });
         }),
-        tap(() => {
+        catchError((err) => {
+          console.log('err: ', err);
+          this.errorMsg = 'Erreur Technique';
+          throw new Error();
+        }),
+        finalize(() => {
           this.isAdding = false;
         })
       )

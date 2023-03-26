@@ -20,7 +20,11 @@ export class ArticleService {
   add(newArticle: NewArticle): Observable<void> {
     return of(undefined).pipe(
       delay(2000),
+
       tap(() => {
+        if (newArticle.name === 'Trucx') {
+          throw new Error('Trucx is forbidden');
+        }
         const article = { ...newArticle, id: generateId() };
         this.articles$.value.push(article);
         this.articles$.next(this.articles$.value);

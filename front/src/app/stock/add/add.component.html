@@ -45,6 +45,9 @@
         </ng-container>
       </span>
     </label>
+    <div class="error">
+      {{ errorMsg }}
+    </div>
     <button class="primary" [disabled]="f.invalid || isAdding">
       <fa-icon
         [icon]="isAdding ? faCircleNotch : faPlus"

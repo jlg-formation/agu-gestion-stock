@@ -48,7 +48,7 @@ export class AddComponent {
         catchError((err) => {
           console.log('err: ', err);
           this.errorMsg = 'Erreur Technique';
-          throw new Error();
+          return of(undefined);
         }),
         finalize(() => {
           this.isAdding = false;

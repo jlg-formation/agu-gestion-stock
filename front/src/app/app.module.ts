@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -25,7 +25,11 @@ registerLocaleData(localeFr, 'fr-BE');
     FontAwesomeModule,
     HttpClientModule,
   ],
-  providers: [{ provide: ArticleService, useClass: HttpArticlesService }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-BE' },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
+    { provide: ArticleService, useClass: HttpArticlesService },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -17,9 +17,7 @@ export class ArticleService {
   articles$ = new ReplaySubject<Article[]>(1);
 
   constructor() {
-    setTimeout(() => {
-      this.articles$.next(this.articles);
-    }, 2000);
+    this.refresh().subscribe();
   }
 
   add(newArticle: NewArticle): Observable<void> {

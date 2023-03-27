@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { throwError } from 'rxjs';
 
 import { AsyncIconButtonComponent } from './async-icon-button.component';
 
@@ -19,6 +20,17 @@ describe('AsyncIconButtonComponent', () => {
   });
 
   it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should run action', () => {
+    component.runAction();
+    expect(component).toBeTruthy();
+  });
+
+  it('should run action in error', () => {
+    component.observable = throwError(() => new Error('oups'));
+    component.runAction();
     expect(component).toBeTruthy();
   });
 });

@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { catchError, finalize, of, switchMap } from 'rxjs';
 import { NewArticle } from 'src/app/interfaces/article';
 import { ArticleService } from 'src/app/services/article.service';
+import { integerInputFilterObservable } from 'src/misc';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss'],
 })
-export class AddComponent {
+export class AddComponent implements OnInit {
   faPlus = faPlus;
 
   isAdding = false;
@@ -32,13 +33,18 @@ export class AddComponent {
     private readonly route: ActivatedRoute
   ) {}
 
+  ngOnInit(): void {
+    integerInputFilterObservable(this.f.controls.qty).subscribe();
+  }
+
   submit() {
     of(undefined)
       .pipe(
         switchMap(() => {
           this.isAdding = true;
           this.errorMsg = '';
-          const newArticle = this.f.value as unknown as NewArticle;
+          const newArticle: NewArticle = this.f.value as unknown as NewArticle;
+          console.log('newArticle: ', newArticle);
           return this.articleService.add(newArticle);
         }),
         switchMap(() => this.articleService.refresh()),

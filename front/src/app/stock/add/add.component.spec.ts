@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { WidgetsModule } from 'src/app/widgets/widgets.module';
 
 import { AddComponent } from './add.component';
 
@@ -8,9 +11,9 @@ describe('AddComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule, WidgetsModule, ReactiveFormsModule],
+      declarations: [AddComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AddComponent);
     component = fixture.componentInstance;

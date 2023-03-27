@@ -17,7 +17,7 @@ export const articles: Article[] = [
   a1,
   {
     id: 'a2',
-    name: 'Marteau',
+    name: 'Tondeuse à gazon',
     price: 2,
     qty: 3,
   },

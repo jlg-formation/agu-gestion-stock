@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ArticleService } from './article.service';
-import { catchError, delay, map, Observable, of, switchMap, tap } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { catchError, delay, map, Observable, of, switchMap } from 'rxjs';
 import { Article, NewArticle } from '../interfaces/article';
+import { ArticleService } from './article.service';
 
 const url = 'http://localhost:3000/api/articles';
 

@@ -10,7 +10,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 export class AsyncSubmitButtonComponent {
   faCircleNotch = faCircleNotch;
   @Input()
-  formGroup = new FormGroup<any>({});
+  formGroup: FormGroup = new FormGroup({});
 
   @Input()
   isSubmitting = false;

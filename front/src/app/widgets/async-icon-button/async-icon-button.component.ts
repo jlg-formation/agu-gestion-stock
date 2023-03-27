@@ -20,22 +20,22 @@ export class AsyncIconButtonComponent {
   label = 'To be defined for accessibility';
 
   @Output()
-  error = new EventEmitter<string>();
+  btnError = new EventEmitter<string>();
 
   @Output()
-  start = new EventEmitter<void>();
+  btnStart = new EventEmitter<void>();
 
   runAction() {
     of(undefined)
       .pipe(
         tap(() => {
           this.isRunning = true;
-          this.start.emit();
+          this.btnStart.emit();
         }),
         switchMap(() => this.observable),
         catchError((err) => {
           console.log('err: ', err);
-          this.error.emit(err.message);
+          this.btnError.emit(err.message);
           return of(undefined);
         }),
         finalize(() => {

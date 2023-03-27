@@ -13,8 +13,6 @@ export class ArticleService {
   articles: Article[] = [];
   articles$ = new BehaviorSubject<Article[] | undefined>(undefined);
 
-  constructor() {}
-
   add(newArticle: NewArticle): Observable<void> {
     return of(undefined).pipe(
       delay(500),

@@ -5,7 +5,7 @@ import {
   faRotateRight,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import { catchError, map, Observable, of, switchMap, take, tap } from 'rxjs';
+import { catchError, Observable, of, switchMap, tap } from 'rxjs';
 import { Article } from '../interfaces/article';
 import { ArticleService } from '../services/article.service';
 
@@ -29,7 +29,7 @@ export class StockComponent {
       articleService
         .refresh()
         .pipe(
-          catchError((err) => {
+          catchError(() => {
             this.errorMsg = 'Erreur de chargement';
             return of(undefined);
           })
@@ -41,7 +41,7 @@ export class StockComponent {
   refresh(): Observable<void> {
     return of(undefined).pipe(
       switchMap(() => this.articleService.refresh()),
-      catchError((err) => {
+      catchError(() => {
         this.errorMsg = 'Erreur de chargement';
         return of(undefined);
       })
@@ -58,7 +58,7 @@ export class StockComponent {
       tap(() => {
         this.selectedArticles.clear();
       }),
-      catchError((err) => {
+      catchError(() => {
         this.errorMsg = 'Erreur technique';
         return of(undefined);
       })

@@ -5,7 +5,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { catchError, finalize, of, switchMap } from 'rxjs';
 import { NewArticle } from 'src/app/interfaces/article';
 import { ArticleService } from 'src/app/services/article.service';
-import { integerInputFilterObservable } from 'src/misc';
+import { integerInputFilterObservable } from 'src/misc/misc';
 
 @Component({
   selector: 'app-add',

@@ -7,12 +7,13 @@ export const integerInputFilterObservable = (
   return integerFC.valueChanges.pipe(
     startWith(integerFC.value),
     map((x) => {
-      if (typeof x !== 'string') {
-        return x + '';
-      }
       if (x === null) {
         return null;
       }
+      if (typeof x !== 'string') {
+        return x + '';
+      }
+
       return x;
     }),
     pairwise(),

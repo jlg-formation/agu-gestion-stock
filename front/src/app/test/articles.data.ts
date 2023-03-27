@@ -6,13 +6,15 @@ export const newArticle: NewArticle = {
   qty: 3,
 };
 
+export const a1: Article = {
+  id: 'a1',
+  name: 'Pelle',
+  price: 2,
+  qty: 3,
+};
+
 export const articles: Article[] = [
-  {
-    id: 'a1',
-    name: 'Pelle',
-    price: 2,
-    qty: 3,
-  },
+  a1,
   {
     id: 'a2',
     name: 'Marteau',

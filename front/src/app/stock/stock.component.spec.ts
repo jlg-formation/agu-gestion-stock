@@ -10,11 +10,9 @@ import { StockComponent } from './stock.component';
 describe('StockComponent', () => {
   let component: StockComponent;
   let fixture: ComponentFixture<StockComponent>;
-  let articleService: ArticleService;
+  const articleService = new ArticleService();
 
   beforeEach(async () => {
-    articleService = new ArticleService();
-
     await TestBed.configureTestingModule({
       imports: [WidgetsModule, FontAwesomeModule],
       declarations: [StockComponent],
